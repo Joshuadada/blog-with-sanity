@@ -2,10 +2,10 @@ import React from 'react'
 import MainLayout from '../main/layout'
 import { Card } from '@/components/Card'
 import { getAllBlogs } from '@/sanity/sanity-utils'
+import { BlogPost } from '../types/blog.type'
 
 export default async function AllInsights() {
-    const blogs: any[] = await getAllBlogs()
-    console.log(blogs)
+    const blogs: BlogPost[] = await getAllBlogs()
 
     return (
         <MainLayout>
@@ -18,7 +18,7 @@ export default async function AllInsights() {
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6 sm:gap-y-8 md:gap-y-10 lg:gap-y-12 mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12'>
                                 {
                                     blogs.map((card) => (
-                                        <Card key={card._id} slug={card.slug} img={card.image} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
+                                        <Card key={card._id} slug={card.slug} img={card.image || ''} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
                                     ))
                                 }
 

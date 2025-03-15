@@ -2,10 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import LockIcon from '../../public/images/icons/lock.svg'
 import Link from 'next/link'
+import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 interface Card {
-    img: any,
-    imageAlt: any,
+    img: string | StaticImport,
+    imageAlt: string,
     category: string,
     title: string,
     description: string,
