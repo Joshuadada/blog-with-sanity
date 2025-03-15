@@ -5,10 +5,11 @@ import FooterImg from "../../public/images/footer-img.svg"
 import Link from 'next/link'
 import { Checkbox } from './ui/checkbox'
 import { getAllTags } from '@/sanity/sanity-utils'
+import { Tag } from '@/app/types/tag.type'
 
 export const Footer = async () => {
   const date = new Date();
-  const tags: any[] = await getAllTags();
+  const tags: Tag[] = await getAllTags();
 
   return (
     <div>
@@ -20,7 +21,7 @@ export const Footer = async () => {
               <h5 className='font-grotesk font-light text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] lg:text-xs uppercase'>ALL TAGS</h5>
               <div className='text-center text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mt-0.5 sm:mt-1 md:mt-1.5'>
                 {
-                  tags.map((tag: any) => tag.tagName).join(' / ')
+                  tags.map((tag: Tag) => tag.tagName).join(' / ')
                 }
               </div>
             </div>

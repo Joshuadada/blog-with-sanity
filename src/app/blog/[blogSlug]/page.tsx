@@ -4,6 +4,8 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import { getAllBlogs, getAllTags, getBlog } from '@/sanity/sanity-utils'
 import DownloadIcon from '../../../../public/images/icons/download.svg'
 import Link from 'next/link'
+import { BlogPost } from '@/app/types/blog.type'
+import { Tag } from '@/app/types/tag.type'
 
 type Props = {
     params: { blogSlug: string }
@@ -12,9 +14,9 @@ type Props = {
 export default async function Blog({ params }: Props) {
     const parameters = await params
     const slug = parameters.blogSlug
-    const recentBlogs: any[] = await getAllBlogs(1, 4)
+    const recentBlogs: BlogPost[] = await getAllBlogs(1, 4)
     const blog = await getBlog(slug)
-    const tags: any[] = await getAllTags();
+    const tags: Tag[] = await getAllTags();
 
     return (
         <div>
@@ -172,7 +174,7 @@ export default async function Blog({ params }: Props) {
                     <div className='max-w-[1600px] mx-auto'>
                         <Carousel className="w-full max-w-3/4 mx-auto">
                             <CarouselContent>
-                                {blog.sectionSevenCarousel.map((image: any, index: any) => (
+                                {blog.sectionSevenCarousel.map((image: {imageUrl: string}, index: string) => (
                                     <CarouselItem key={index}>
                                         <div className="p-1">
                                             <Image src={image.imageUrl} alt='Image' width={100} height={100} className='max-w-[280px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[590px] w-full aspect-square object-cover mx-auto'></Image>
@@ -205,7 +207,7 @@ export default async function Blog({ params }: Props) {
 
                             <div className='flex items-center justify-center sm:justify-start flex-wrap gap-5 sm:gap-6 md:gap-7 lg:gap-8 mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8'>
                                 {
-                                    tags.map((tag: any) => (
+                                    tags.map((tag: Tag) => (
                                         <div key={tag._id} className='bg-[#F2F2F7] py-1 sm:py-2 md:py-3 px-5 sm:px-6 md:px-7 lg:px-8 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl'>{tag.tagName}</div>
                                     ))
                                 }
@@ -224,7 +226,7 @@ export default async function Blog({ params }: Props) {
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6 sm:gap-y-8 md:gap-y-10 lg:gap-y-12 mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12'>
                                 {
                                     recentBlogs.map((card) => (
-                                        <Card key={card._id} slug={card.slug} img={card.image} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
+                                        <Card key={card._id} slug={card.slug} img={card.image || ''} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
                                     ))
                                 }
 

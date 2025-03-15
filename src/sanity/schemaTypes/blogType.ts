@@ -1,6 +1,5 @@
 import { TagIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
-import { client } from '../lib/client';
 
 export const blogType = defineType({
   name: 'blog',
