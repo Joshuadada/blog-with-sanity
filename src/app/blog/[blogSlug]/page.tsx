@@ -8,14 +8,14 @@ import { BlogPost } from '@/app/types/blog.type'
 import { Tag } from '@/app/types/tag.type'
 
 type Props = {
-    params: { blogSlug: string }
+    params: Promise<{ blogSlug: string }>;
 }
 
 export default async function Blog({ params }: Props) {
-    const parameters = await params
-    const slug = parameters.blogSlug
-    const recentBlogs: BlogPost[] = await getAllBlogs(1, 4)
-    const blog = await getBlog(slug)
+    const { blogSlug } = await params;
+
+    const recentBlogs: BlogPost[] = await getAllBlogs(1, 4);
+    const blog = await getBlog(blogSlug);
     const tags: Tag[] = await getAllTags();
 
     return (
