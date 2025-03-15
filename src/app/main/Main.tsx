@@ -5,11 +5,12 @@ import { Card } from '@/components/Card'
 import { getAllBlogs, getFeatureBlogs, getHeadlineBlogs } from '@/sanity/sanity-utils'
 import Link from 'next/link'
 import LockIcon from '../../../public/images/icons/lock.svg'
+import { BlogPost } from '../types/blog.type'
 
 export default async function Main() {
-  const headlineBlogs: any[] = await getHeadlineBlogs()
-  const featureBlogs: any[] = await getFeatureBlogs()
-  const recentBlogs: any[] = await getAllBlogs(1, 8)
+  const headlineBlogs: BlogPost[] = await getHeadlineBlogs()
+  const featureBlogs: BlogPost[] = await getFeatureBlogs()
+  const recentBlogs: BlogPost[] = await getAllBlogs(1, 8)
 
   return (
     <MainLayout>
@@ -26,7 +27,7 @@ export default async function Main() {
             </div>
 
             <div className='order-1 md:order-2 relative'>
-              <Image src={headlineBlogs[0].image} alt={headlineBlogs[0].title} height={100} width={100} className='w-full aspect-square object-cover'></Image>
+              <Image src={headlineBlogs[0].image || ''} alt={headlineBlogs[0].title} height={100} width={100} className='w-full aspect-square object-cover'></Image>
               <div className='h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex items-center justify-center rounded-full bg-[#A594FD] absolute top-1 right-1 sm:top-1.5 sm:right-1.5 md:top-2 md:right-2 lg:top-2.5 lg:right-2.5'>
                 <Image src={LockIcon} alt={'lock icon'} width={100} height={100} className='w-4 sm:w-5 md:w-6 lg:w-7'></Image>
               </div>
@@ -42,7 +43,7 @@ export default async function Main() {
           featureBlogs.length > 0 && <div className='max-w-[1600px] mx-auto'>
             <div className='flex flex-col w-full items-center mx-auto gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 max-w-[823px] py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 2xl:py-24 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
               <div className='relative'>
-                <Image src={featureBlogs[0].image} height={100} width={100} alt={featureBlogs[0].title} className='w-[826px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl aspect-[6/4] object-cover'></Image>
+                <Image src={featureBlogs[0].image || ''} height={100} width={100} alt={featureBlogs[0].title} className='w-[826px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl aspect-[6/4] object-cover'></Image>
                 <div className='h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex items-center justify-center rounded-full bg-[#A594FD] absolute top-1 right-1 sm:top-1.5 sm:right-1.5 md:top-2 md:right-2 lg:top-2.5 lg:right-2.5'>
                   <Image src={LockIcon} alt={'lock icon'} width={100} height={100} className='w-4 sm:w-5 md:w-6 lg:w-7'></Image>
                 </div>
@@ -72,7 +73,7 @@ export default async function Main() {
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6 sm:gap-y-8 md:gap-y-10 lg:gap-y-12 mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12'>
                   {
                     recentBlogs.map((card) => (
-                      <Card key={card._id} slug={card.slug} img={card.image} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
+                      <Card key={card._id} slug={card.slug} img={card.image || ''} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
                     ))
                   }
 

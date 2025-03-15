@@ -1,7 +1,9 @@
 import { groq } from "next-sanity";
 import { client } from "./lib/client";
+import { Tag } from "@/app/types/tag.type";
+import { BlogPost } from "@/app/types/blog.type";
 
-export async function getAllBlogs(page = 1, limit = 5): Promise<any[]> {
+export async function getAllBlogs(page = 1, limit = 5): Promise<BlogPost[]> {
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
 
@@ -22,7 +24,7 @@ export async function getAllBlogs(page = 1, limit = 5): Promise<any[]> {
     )
 }
 
-export async function getCustomerBlogs(page = 1, limit = 24): Promise<any[]> {
+export async function getCustomerBlogs(page = 1, limit = 24): Promise<BlogPost[]> {
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
 
@@ -44,7 +46,7 @@ export async function getCustomerBlogs(page = 1, limit = 24): Promise<any[]> {
     )
 }
 
-export async function getEconomicBlogs(page = 1, limit = 5): Promise<any[]> {
+export async function getEconomicBlogs(page = 1, limit = 5): Promise<BlogPost[]> {
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
 
@@ -66,7 +68,7 @@ export async function getEconomicBlogs(page = 1, limit = 5): Promise<any[]> {
     )
 }
 
-export async function getHeadlineBlogs(): Promise<any[]> {
+export async function getHeadlineBlogs(): Promise<BlogPost[]> {
     return client.fetch(
         `*[_type == "blog" && isHeadline == true]
     | order(_createdAt desc) {
@@ -85,7 +87,7 @@ export async function getHeadlineBlogs(): Promise<any[]> {
     )
 }
 
-export async function getFeatureBlogs(): Promise<any[]> {
+export async function getFeatureBlogs(): Promise<BlogPost[]> {
     return client.fetch(
         `
         *[_type == "blog" && isFeature == true]
@@ -157,7 +159,7 @@ export async function getBlog(slug: string) {
     )
 }
 
-export async function getAllTags(): Promise<any[]> {
+export async function getAllTags(): Promise<Tag[]> {
     return client.fetch(
         groq`*[_type == "tag"] | order(_createdAt desc){
         _id,
