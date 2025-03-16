@@ -8,14 +8,14 @@ import { BlogPost } from '@/app/types/blog.type'
 import { Tag } from '@/app/types/tag.type'
 
 type Props = {
-    params: { blogSlug: string }
+    params: Promise<{ blogSlug: string }>;
 }
 
 export default async function Blog({ params }: Props) {
-    const parameters = await params
-    const slug = parameters.blogSlug
-    const recentBlogs: BlogPost[] = await getAllBlogs(1, 4)
-    const blog = await getBlog(slug)
+    const { blogSlug } = await params;
+
+    const recentBlogs: BlogPost[] = await getAllBlogs(1, 4);
+    const blog = await getBlog(blogSlug);
     const tags: Tag[] = await getAllTags();
 
     return (
@@ -50,7 +50,7 @@ export default async function Blog({ params }: Props) {
                         }
 
                         {
-                            blog.pdfUrl && (
+                            blog?.pdfUrl && (
                                 <Link href={blog.pdfUrl} className='cursor-pointer'>
                                     <button className='flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-2.5 bg-[#E5E5EA] py-0.5 sm:py-1 md:py-1.5 px-2 sm:px-3 md:px-4 rounded-3xl sm:rounded-[40px] md:rounded-[70px] lg:rounded-[100px] cursor-pointer'>
                                         <span className='text-sm sm:text-base md:text-lg lg:text-xl font-medium'>Download as PDF</span>
