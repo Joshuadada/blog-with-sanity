@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import WiseThingLogo from "../../public/images/wise-thing-logo.svg"
 import FooterImg from "../../public/images/footer-img.svg"
@@ -9,7 +11,15 @@ import { Tag } from '@/app/types/tag.type'
 
 export default async function Footer() {
   const date = new Date();
-  const tags: Tag[] = await getAllTags();
+  const [tags, setTags] = useState<Tag[]>([]);
+
+  useEffect(() => {
+    async function fetchTags() {
+      const tagsList: Tag[] = await getAllTags();
+      setTags(tagsList);
+    }
+    fetchTags();
+  }, []);
 
   return (
     <div>
