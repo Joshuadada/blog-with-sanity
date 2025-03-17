@@ -11,6 +11,7 @@ export default function AllInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const blogsPerPage = 2;
 
   useEffect(() => {
@@ -21,6 +22,8 @@ export default function AllInsights() {
         setTotalBlogs(blogResponse.total);
       } catch (error) {
         console.error("Error fetching blogs:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -32,6 +35,12 @@ export default function AllInsights() {
       <div className="max-w-[1600px] mx-auto py-10 px-8 sm:px-12">
         <h4 className="text-center text-lg uppercase">All Insights</h4>
 
+        {isLoading && <p className="text-center text-sm mt-5">Fetching data...</p>}
+
+        {!isLoading && blogs.length === 0 && (
+          <p className="text-center text-sm mt-4">No insights available.</p>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {blogs.map((card) => (
             <Card
@@ -41,7 +50,7 @@ export default function AllInsights() {
               imageAlt={card.title}
               title={card.title}
               description={card.description}
-              category={card.category.tagName}
+              category={card.category?.tagName}
             />
           ))}
         </div>
