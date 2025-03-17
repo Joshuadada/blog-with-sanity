@@ -7,7 +7,7 @@ import { Checkbox } from './ui/checkbox'
 import { getAllTags } from '@/sanity/sanity-utils'
 import { Tag } from '@/app/types/tag.type'
 
-export const Footer = async () => {
+export default async function Footer() {
   const date = new Date();
   const tags: Tag[] = await getAllTags();
 

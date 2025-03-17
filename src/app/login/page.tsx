@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { baseUrl } from '../../../env'
 
 const formSchema = z.object({
   email: z.string().email('Invalid Email'),
@@ -38,7 +39,29 @@ export default function Login() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+
+    const apiUrl = `${baseUrl}/auth/login`
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(newUserData => {
+        // Process the newly created user data
+        console.log('New User Data:', newUserData);
+      })
+      .catch(error => {
+        // console.error('Error:', error);
+        alert(error)
+      });
   }
 
   return (
