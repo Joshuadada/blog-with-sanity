@@ -32,3 +32,7 @@ export type BlogPost = {
     sectionOneText?: string[];
   };
   
+  export type BlogResponse = {
+    blogs: BlogPost[];
+    total: number;
+  }

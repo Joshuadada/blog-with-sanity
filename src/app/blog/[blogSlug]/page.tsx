@@ -4,7 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import { getAllBlogs, getAllTags, getBlog } from '@/sanity/sanity-utils'
 import DownloadIcon from '../../../../public/images/icons/download.svg'
 import Link from 'next/link'
-import { BlogPost } from '@/app/types/blog.type'
+import { BlogResponse } from '@/app/types/blog.type'
 import { Tag } from '@/app/types/tag.type'
 
 type Props = {
@@ -14,7 +14,8 @@ type Props = {
 export default async function Blog({ params }: Props) {
     const { blogSlug } = await params;
 
-    const recentBlogs: BlogPost[] = await getAllBlogs(1, 4);
+    const blogResponse: BlogResponse = await getAllBlogs(1, 4);
+    const recentBlogs = blogResponse.blogs;
     const blog = await getBlog(blogSlug);
     const tags: Tag[] = await getAllTags();
 
@@ -208,7 +209,7 @@ export default async function Blog({ params }: Props) {
                             <div className='flex items-center justify-center sm:justify-start flex-wrap gap-5 sm:gap-6 md:gap-7 lg:gap-8 mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8'>
                                 {
                                     tags.map((tag: Tag) => (
-                                        <div key={tag._id} className='bg-[#F2F2F7] py-1 sm:py-2 md:py-3 px-5 sm:px-6 md:px-7 lg:px-8 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl'>{tag.tagName}</div>
+                                        <div key={tag._id} className='bg-[#F2F2F7] py-1 sm:py-2 md:py-3 px-4 sm:px-6 md:px-7 lg:px-8 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>{tag.tagName}</div>
                                     ))
                                 }
                             </div>
@@ -232,7 +233,9 @@ export default async function Blog({ params }: Props) {
 
                             </div>
 
-                            <button className='mx-auto block font-medium text-base sm:text-lg md:text-xl lg:text-2xl border-2 border-black px-5 sm:px-6 md:px-7 lg:px-8 py-1 md:py-2 lg:py-3 rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12 cursor-pointer'>View All Insights</button>
+                            <Link href={'/all-insights'}>
+                                <button className='mx-auto block font-medium text-base sm:text-lg md:text-xl lg:text-2xl border-2 border-black px-5 sm:px-6 md:px-7 lg:px-8 py-1 md:py-2 lg:py-3 rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12 cursor-pointer'>View All Insights</button>
+                            </Link>
                         </div>
                     </div>
                 )
