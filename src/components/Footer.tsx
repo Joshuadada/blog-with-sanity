@@ -9,7 +9,7 @@ import { Checkbox } from './ui/checkbox'
 import { getAllTags } from '@/sanity/sanity-utils'
 import { Tag } from '@/app/types/tag.type'
 
-export default async function Footer() {
+export default function Footer() {
   const date = new Date();
   const [tags, setTags] = useState<Tag[]>([]);
 
