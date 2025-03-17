@@ -11,12 +11,16 @@ export default function ConsumerInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const blogsPerPage = 2;
 
   useEffect(() => {
     const fetchBlogs = async () => {
+      setIsLoading(true)
       try {
+        console.log("Loading", isLoading)
         const blogResponse: BlogResponse = await getConsumerBlogs(currentPage, blogsPerPage);
+        setIsLoading(false)
         setBlogs(blogResponse.blogs);
         setTotalBlogs(blogResponse.total);
       } catch (error) {
@@ -31,6 +35,8 @@ export default function ConsumerInsights() {
     <MainLayout>
       <div className="max-w-[1600px] mx-auto py-10 px-8 sm:px-12">
         <h4 className="text-center text-lg uppercase">Consumer Insights</h4>
+
+        {isLoading && <p className="text-center text-sm">Fetching data...</p>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {blogs.map((card) => (
