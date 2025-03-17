@@ -5,12 +5,13 @@ import { Card } from '@/components/Card'
 import { getAllBlogs, getFeatureBlogs, getHeadlineBlogs } from '@/sanity/sanity-utils'
 import Link from 'next/link'
 import LockIcon from '../../../public/images/icons/lock.svg'
-import { BlogPost } from '../types/blog.type'
+import { BlogPost, BlogResponse } from '../types/blog.type'
 
 export default async function Main() {
   const headlineBlogs: BlogPost[] = await getHeadlineBlogs()
   const featureBlogs: BlogPost[] = await getFeatureBlogs()
-  const recentBlogs: BlogPost[] = await getAllBlogs(1, 8)
+  const blogResponse: BlogResponse = await getAllBlogs(1, 8)
+  const recentBlogs = blogResponse.blogs
 
   return (
     <MainLayout>

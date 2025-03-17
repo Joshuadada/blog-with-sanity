@@ -1,32 +1,58 @@
-import React from 'react'
-import MainLayout from '../main/layout'
-import { Card } from '@/components/Card'
-import { getEconomicBlogs } from '@/sanity/sanity-utils'
-import { BlogPost } from '../types/blog.type'
+"use client";
 
-export default async function EconomicInsights() {
-    const blogs: BlogPost[] = await getEconomicBlogs()
+import React, { useEffect, useState } from "react";
+import MainLayout from "../main/layout";
+import { Card } from "@/components/Card";
+import { getEconomicBlogs } from "@/sanity/sanity-utils";
+import { BlogResponse, BlogPost } from "../types/blog.type";
+import Pagination from "@/components/Pagination";
 
-    return (
-        <MainLayout>
-            <div>
-                {
-                    blogs.length > 0 && (
-                        <div className='max-w-[1600px] mx-auto py-6 sm:py-7 md:py-8 lg:py-10 xl:py-12 2xl:py-14 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
-                            <h4 className='font-grotesk text-center text-xs sm:text-sm md:text-base lg:text-lg uppercase'>ECONOMIC INSIGHTS</h4>
+export default function EconomicInsights() {
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [totalBlogs, setTotalBlogs] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const blogsPerPage = 2;
 
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6 sm:gap-y-8 md:gap-y-10 lg:gap-y-12 mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12'>
-                                {
-                                    blogs.map((card) => (
-                                        <Card key={card._id} slug={card.slug} img={card.image || ''} imageAlt={card.title} title={card.title} description={card.description} category={card.category.tagName}></Card>
-                                    ))
-                                }
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const blogResponse: BlogResponse = await getEconomicBlogs(currentPage, blogsPerPage);
+        setBlogs(blogResponse.blogs);
+        setTotalBlogs(blogResponse.total);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
 
-                            </div>
-                        </div>
-                    )
-                }
-            </div>
-        </MainLayout>
-    )
+    fetchBlogs();
+  }, [currentPage]);
+
+  return (
+    <MainLayout>
+      <div className="max-w-[1600px] mx-auto py-10 px-8 sm:px-12">
+        <h4 className="text-center text-lg uppercase">Economic Insights</h4>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+          {blogs.map((card) => (
+            <Card
+              key={card._id}
+              slug={card.slug}
+              img={card.image || ""}
+              imageAlt={card.title}
+              title={card.title}
+              description={card.description}
+              category={card.category.tagName}
+            />
+          ))}
+        </div>
+
+        {/* Pagination Component */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(totalBlogs / blogsPerPage)}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </MainLayout>
+  );
 }

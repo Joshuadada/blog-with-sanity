@@ -3,74 +3,133 @@ import { client } from "./lib/client";
 import { Tag } from "@/app/types/tag.type";
 import { BlogPost } from "@/app/types/blog.type";
 
-export async function getAllBlogs(page = 1, limit = 5): Promise<BlogPost[]> {
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+export async function getAllBlogs(page = 1, limit = 24): Promise<{ blogs: BlogPost[]; total: number }> {
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
 
-    return client.fetch(
-        groq`*[_type == "blog"] | order(_createdAt desc) [${startIndex}...${endIndex}]{
-      _id,
-      _createdAt,
-      title,
-      "slug": slug.current,
-      "image": titleImage.asset->url,
-      "category": category->{
-        tagName
-      },
-      description,
-      isFeature,
-      isHeadline
-    }`
-    )
+  return client.fetch(
+    groq`
+      {
+        "total": count(*[_type == "blog"]),
+        "blogs": *[_type == "blog"] | order(_createdAt desc) [${startIndex}...${endIndex}] {
+          _id,
+          _createdAt,
+          title,
+          "slug": slug.current,
+          "image": titleImage.asset->url,
+          "category": category->{
+            tagName
+          },
+          description,
+          isFeature,
+          isHeadline
+        }
+      }
+    `
+  );
 }
 
-export async function getCustomerBlogs(page = 1, limit = 24): Promise<BlogPost[]> {
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+export async function getConsumerBlogs(page = 1, limit = 24): Promise<{ blogs: BlogPost[]; total: number }> {
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
 
-    return client.fetch(
-        `*[_type == "blog" && lower(category->tagName) == "consumer insights"]
-    | order(_createdAt desc) [${startIndex}...${endIndex}] {
-      _id,
-      _createdAt,
-      title,
-      "slug": slug.current,
-      "image": titleImage.asset->url,
-      "category": category->{
-        tagName
-      },
-      description,
-      isFeature,
-      isHeadline
-    }`
-    )
+  return client.fetch(
+    groq`
+      {
+        "total": count(*[_type == "blog" && lower(category->tagName) == "consumer insights"]),
+        "blogs": *[_type == "blog" && lower(category->tagName) == "consumer insights"]
+        | order(_createdAt desc) [${startIndex}...${endIndex}] {
+          _id,
+          _createdAt,
+          title,
+          "slug": slug.current,
+          "image": titleImage.asset->url,
+          "category": category->{
+            tagName
+          },
+          description,
+          isFeature,
+          isHeadline
+        }
+      }
+    `
+  );
 }
 
-export async function getEconomicBlogs(page = 1, limit = 5): Promise<BlogPost[]> {
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+export async function getEconomicBlogs(page = 1, limit = 24): Promise<{ blogs: BlogPost[]; total: number }> {
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
 
-    return client.fetch(
-        `*[_type == "blog" && lower(category->tagName) == "economic insights"]
-    | order(_createdAt desc) [${startIndex}...${endIndex}] {
-      _id,
-      _createdAt,
-      title,
-      "slug": slug.current,
-      "image": titleImage.asset->url,
-      "category": category->{
-        tagName
-      },
-      description,
-      isFeature,
-      isHeadline
-    }`
-    )
+  return client.fetch(
+    groq`
+      {
+        "total": count(*[_type == "blog" && lower(category->tagName) == "economic insights"]),
+        "blogs": *[_type == "blog" && lower(category->tagName) == "economic insights"]
+        | order(_createdAt desc) [${startIndex}...${endIndex}] {
+          _id,
+          _createdAt,
+          title,
+          "slug": slug.current,
+          "image": titleImage.asset->url,
+          "category": category->{
+            tagName
+          },
+          description,
+          isFeature,
+          isHeadline
+        }
+      }
+    `
+  );
 }
+
+// export async function getCustomerBlogs(page = 1, limit = 24): Promise<BlogPost[]> {
+//   const startIndex = (page - 1) * limit;
+//   const endIndex = startIndex + limit;
+
+//   return client.fetch(
+//     `*[_type == "blog" && lower(category->tagName) == "consumer insights"]
+//     | order(_createdAt desc) [${startIndex}...${endIndex}] {
+//       _id,
+//       _createdAt,
+//       title,
+//       "slug": slug.current,
+//       "image": titleImage.asset->url,
+//       "category": category->{
+//         tagName
+//       },
+//       description,
+//       isFeature,
+//       isHeadline
+//     }`
+//   )
+// }
+
+// export async function getEconomicBlogs(page = 1, limit = 5): Promise<BlogPost[]> {
+//   const startIndex = (page - 1) * limit;
+//   const endIndex = startIndex + limit;
+
+//   return client.fetch(
+//     `*[_type == "blog" && lower(category->tagName) == "economic insights"]
+//     | order(_createdAt desc) [${startIndex}...${endIndex}] {
+//       _id,
+//       _createdAt,
+//       title,
+//       "slug": slug.current,
+//       "image": titleImage.asset->url,
+//       "category": category->{
+//         tagName
+//       },
+//       description,
+//       isFeature,
+//       isHeadline
+//     }`
+//   )
+// }
 
 export async function getHeadlineBlogs(): Promise<BlogPost[]> {
-    return client.fetch(
-        `*[_type == "blog" && isHeadline == true]
+  return client.fetch(
+    `*[_type == "blog" && isHeadline == true]
     | order(_createdAt desc) {
       _id,
       _createdAt,
@@ -84,12 +143,12 @@ export async function getHeadlineBlogs(): Promise<BlogPost[]> {
       isFeature,
       isHeadline
     }`
-    )
+  )
 }
 
 export async function getFeatureBlogs(): Promise<BlogPost[]> {
-    return client.fetch(
-        `
+  return client.fetch(
+    `
         *[_type == "blog" && isFeature == true]
         | order(_createdAt desc) {
         _id,
@@ -105,12 +164,12 @@ export async function getFeatureBlogs(): Promise<BlogPost[]> {
         isHeadline
         }
     `
-    )
+  )
 }
 
 export async function getBlog(slug: string) {
-    return client.fetch(
-        `
+  return client.fetch(
+    `
         *[_type == "blog" && slug.current == "${slug}"][0]{
         title,
         description,
@@ -156,14 +215,14 @@ export async function getBlog(slug: string) {
         "sectionEightText": content.sectionEight.sectionEightText[].children[].text
       }
     `
-    )
+  )
 }
 
 export async function getAllTags(): Promise<Tag[]> {
-    return client.fetch(
-        groq`*[_type == "tag"] | order(_createdAt desc){
+  return client.fetch(
+    groq`*[_type == "tag"] | order(_createdAt desc){
         _id,
         tagName
     }`
-    )
+  )
 }
