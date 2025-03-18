@@ -11,7 +11,7 @@ export default function EconomicInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const blogsPerPage = 2;
+  const blogsPerPage = 24;
 
   useEffect(() => {
     const fetchBlogs = async () => {

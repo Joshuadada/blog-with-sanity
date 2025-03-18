@@ -12,7 +12,7 @@ export default function AllInsights() {
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const blogsPerPage = 2;
+  const blogsPerPage = 24;
 
   useEffect(() => {
     const fetchBlogs = async () => {

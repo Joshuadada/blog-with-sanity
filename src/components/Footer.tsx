@@ -1,4 +1,4 @@
-"use state"
+"use client"
 
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
@@ -42,11 +42,11 @@ export default function Footer() {
       <div className='bg-[#A594FD]'>
         <div className='max-w-[1600px] mx-auto px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-28 pt-6'>
           <div className='flex flex-col justify-center items-center mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-[736px]'>
-            <Image src={WiseThingLogo} className='w-52 sm:w-60 md:w-64 lg:w-72' alt=''></Image>
-            <h3 className='text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4 sm:mt-5 md:mt-6 lg:mt-7'>Turn consumer intelligence into growth</h3>
+            <Image src={WiseThingLogo} className='w-52 max-w-[180px] sm:w-60 md:w-64 lg:w-72' alt=''></Image>
+            <h3 className='text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4 sm:mt-5 md:mt-6 lg:mt-7 font-medium'>Turn consumer intelligence into growth</h3>
             <p className='text-center text-base sm:text-lg md:text-xl lg:text-2xl mt-3 sm:mt-4 md:mt-5 lg:mt-6'>Build, automate, and manage consumer panels with powerful features designed to test and predict real-world consumer behavior.</p>
             <button className='bg-[#1A1A32] mt-9 sm:mt-10 md:mt-11 lg:mt-12 flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-3 md:py-4 gap-2 sm:gap-3 md:gap-4 rounded-sm md:rounded-md cursor-pointer'>
-              <div className='h-2 sm:h-3 w-2 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5 bg-[#A594FD] rounded-full'></div>
+              <div className='h-4 w-4 lg:h-5 lg:w-5 bg-[#A594FD] rounded-full'></div>
               <span className='text-white text-base sm:text-lg md:text-xl lg:text-2xl font-medium'>Get Started</span>
             </button>
 
