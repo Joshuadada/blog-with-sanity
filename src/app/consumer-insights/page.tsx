@@ -11,13 +11,16 @@ export default function ConsumerInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const blogsPerPage = 2;
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const blogsPerPage = 24;
 
   useEffect(() => {
     const fetchBlogs = async () => {
+      setIsLoading(true)
       try {
+        console.log("Loading", isLoading)
         const blogResponse: BlogResponse = await getConsumerBlogs(currentPage, blogsPerPage);
+        setIsLoading(false)
         setBlogs(blogResponse.blogs);
         setTotalBlogs(blogResponse.total);
       } catch (error) {
