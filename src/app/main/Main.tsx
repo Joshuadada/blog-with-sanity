@@ -21,14 +21,14 @@ export default async function Main() {
           <div className='max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 items-start py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-28 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
             <div className='order-2 md:order-1 flex flex-col gap-8 sm:gap-10 md:gap-16 lg:gap-24 xl:gap-36 2xl:gap-40'>
               <div className='flex flex-col gap-1'>
-                <p className='font-grotesk font-light text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] lg:text-xs uppercase'>{headlineBlogs[0].category.tagName}</p>
+                <p className='font-grotesk font-light text-[0.6rem] lg:text-xs uppercase'>{headlineBlogs[0].category.tagName}</p>
                 <h3 className='text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl 2xl:text-8xl font-glyphic'>{headlineBlogs[0].title}</h3>
               </div>
-              <p className='font-grotesk text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>{headlineBlogs[0].description.length > 200 ? headlineBlogs[0].description.slice(0, 200) + "..." : headlineBlogs[0].description}</p>
+              <p className='font-grotesk text-xs md:text-sm lg:text-base'>{headlineBlogs[0].description.length > 200 ? headlineBlogs[0].description.slice(0, 200) + "..." : headlineBlogs[0].description}</p>
             </div>
 
             <div className='order-1 md:order-2 relative'>
-              <Image src={headlineBlogs[0].image || ''} alt={headlineBlogs[0].title} height={100} width={100} className='w-full aspect-square object-cover'></Image>
+              <Image src={headlineBlogs[0].image || ''} alt={headlineBlogs[0].title} height={100} width={100} className='w-full aspect-square object-cover rounded-[10px] md:rounded-[12px] lg:rounded-[15px]'></Image>
               <div className='h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex items-center justify-center rounded-full bg-[#A594FD] absolute top-1 right-1 sm:top-1.5 sm:right-1.5 md:top-2 md:right-2 lg:top-2.5 lg:right-2.5'>
                 <Image src={LockIcon} alt={'lock icon'} width={100} height={100} className='w-4 sm:w-5 md:w-6 lg:w-7'></Image>
               </div>
@@ -42,7 +42,7 @@ export default async function Main() {
 
         {
           featureBlogs.length > 0 && <div className='max-w-[1600px] mx-auto'>
-            <div className='flex flex-col w-full items-center mx-auto gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 max-w-[823px] py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 2xl:py-24 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
+            <div className='flex flex-col w-full items-center mx-auto gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 max-w-[823px] py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 2xl:py-[107px] px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
               <div className='relative'>
                 <Image src={featureBlogs[0].image || ''} height={100} width={100} alt={featureBlogs[0].title} className='w-[826px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl aspect-[6/4] object-cover'></Image>
                 <div className='h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex items-center justify-center rounded-full bg-[#A594FD] absolute top-1 right-1 sm:top-1.5 sm:right-1.5 md:top-2 md:right-2 lg:top-2.5 lg:right-2.5'>
@@ -55,7 +55,7 @@ export default async function Main() {
 
                 <h3 className='text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl 2xl:text-7xl font-glyphic'>{featureBlogs[0].title}</h3>
 
-                <p className='font-grotesk text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>{featureBlogs[0].description.length > 200 ? featureBlogs[0].description.slice(0, 200) + "..." : featureBlogs[0].description}</p>
+                <p className='font-grotesk text-xs md:text-sm lg:text-base'>{featureBlogs[0].description.length > 200 ? featureBlogs[0].description.slice(0, 200) + "..." : featureBlogs[0].description}</p>
               </div>
             </div>
           </div>
