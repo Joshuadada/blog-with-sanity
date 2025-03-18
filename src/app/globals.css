@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap'); */
 
 @plugin "tailwindcss-animate";
 
@@ -123,6 +123,11 @@
 @font-face {
   font-family: 'hk-grotesk';
   src: url('../../public/fonts/hk-grotesk.regular.ttf');
+}
+
+@font-face {
+  font-family: 'Faculty Glyphic';
+  src: url('../../public/fonts/FacultyGlyphic-Regular.ttf');
 }
 
 @layer base {

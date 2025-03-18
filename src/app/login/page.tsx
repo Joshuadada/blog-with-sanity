@@ -77,7 +77,7 @@ export default function Login() {
           <Image src={Logo} alt='Logo' className='w-[172px] dark:invert'></Image>
         </div>
 
-        <div className='flex-1 flex items-center justify-center'>
+        <div className='flex-1 flex items-center justify-center md:mt-7'>
           <div className='md:max-w-[388px] w-full md:pr-8'>
             <h4 className='text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold'>Welcome Back!</h4>
             <div className='mt-6 sm:mt-7 md:mt-8 lg:mt-10 xl:mt-12'>
