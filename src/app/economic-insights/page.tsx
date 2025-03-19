@@ -6,17 +6,20 @@ import { Card } from "@/components/Card";
 import { getEconomicBlogs } from "@/sanity/sanity-utils";
 import { BlogResponse, BlogPost } from "../types/blog.type";
 import Pagination from "@/components/Pagination";
+import { useSearchParams } from "next/navigation";
 
 export default function EconomicInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const blogsPerPage = 2;
+  const blogsPerPage = 24;
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const blogResponse: BlogResponse = await getEconomicBlogs(currentPage, blogsPerPage);
+        const blogResponse: BlogResponse = await getEconomicBlogs(currentPage, blogsPerPage, search);
         setBlogs(blogResponse.blogs);
         setTotalBlogs(blogResponse.total);
       } catch (error) {
@@ -25,7 +28,7 @@ export default function EconomicInsights() {
     };
 
     fetchBlogs();
-  }, [currentPage]);
+  }, [currentPage, search]);
 
   return (
     <MainLayout>

@@ -6,18 +6,21 @@ import { Card } from "@/components/Card";
 import { getAllBlogs } from "@/sanity/sanity-utils";
 import { BlogResponse, BlogPost } from "../types/blog.type";
 import Pagination from "@/components/Pagination";
+import { useSearchParams } from "next/navigation";
 
 export default function AllInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const blogsPerPage = 2;
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
+  const blogsPerPage = 24;
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const blogResponse: BlogResponse = await getAllBlogs(currentPage, blogsPerPage);
+        const blogResponse: BlogResponse = await getAllBlogs(currentPage, blogsPerPage, search);
         setBlogs(blogResponse.blogs);
         setTotalBlogs(blogResponse.total);
       } catch (error) {
@@ -28,7 +31,7 @@ export default function AllInsights() {
     };
 
     fetchBlogs();
-  }, [currentPage]);
+  }, [currentPage, search]);
 
   return (
     <MainLayout>
