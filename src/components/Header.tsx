@@ -8,7 +8,7 @@ import SearchIcon from "../../public/images/icons/search.svg"
 import HambuggerIcon from "../../public/images/icons/hamburger.svg"
 import CloseIcon from "../../public/images/icons/close.svg"
 import { usePathname, useRouter } from 'next/navigation'
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { Search } from 'lucide-react'
