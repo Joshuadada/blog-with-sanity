@@ -6,6 +6,7 @@ import { Card } from "@/components/Card";
 import { getConsumerBlogs } from "@/sanity/sanity-utils";
 import { BlogResponse, BlogPost } from "../types/blog.type";
 import Pagination from "@/components/Pagination";
+import { useSearchParams } from "next/navigation";
 
 export default function ConsumerInsights() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -13,13 +14,14 @@ export default function ConsumerInsights() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const blogsPerPage = 24;
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
 
   useEffect(() => {
     const fetchBlogs = async () => {
       setIsLoading(true)
       try {
-        console.log("Loading", isLoading)
-        const blogResponse: BlogResponse = await getConsumerBlogs(currentPage, blogsPerPage);
+        const blogResponse: BlogResponse = await getConsumerBlogs(currentPage, blogsPerPage, search);
         setIsLoading(false)
         setBlogs(blogResponse.blogs);
         setTotalBlogs(blogResponse.total);
@@ -29,10 +31,10 @@ export default function ConsumerInsights() {
         setIsLoading(false);
       }
     };
-  
+
     fetchBlogs();
-  }, [currentPage]);
-  
+  }, [currentPage, search]);
+
 
   return (
     <MainLayout>

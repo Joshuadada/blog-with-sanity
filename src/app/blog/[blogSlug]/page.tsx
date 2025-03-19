@@ -34,19 +34,19 @@ export default async function Blog({ params }: Props) {
                     <div className='text-center flex flex-col items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14'>
                         {
                             blog?.category?.tagName && (
-                                <p className='font-grotesk font-light text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] lg:text-xs uppercase'>{blog.category.tagName}</p>
+                                <p className='font-grotesk font-light text-[0.6rem] lg:text-xs uppercase'>{blog.category.tagName}</p>
                             )
                         }
 
                         {
                             blog?.title && (
-                                <h3 className='text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl 2xl:text-7xl font-glyphic'>{blog.title}</h3>
+                                <h3 className='text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl 2xl:text-7xl font-glyphic lg:leading-16 xl:leading-20 2xl:leading-24'>{blog.title}</h3>
                             )
                         }
 
                         {
                             blog?.description && (
-                                <p className='font-grotesk text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>{blog.description}</p>
+                                <p className='font-grotesk text-xs md:text-sm lg:text-base'>{blog.description}</p>
                             )
                         }
 

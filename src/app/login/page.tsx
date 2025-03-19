@@ -67,14 +67,14 @@ export default function Login() {
   return (
     <div className='flex flex-col md:grid grid-cols-1 md:grid-cols-2 gap-y-7 md:h-screen p-6 sm:p-7 md:p-8 max-w-[1600px] mx-auto'>
       <div className='flex md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
-        <h5 className='text-2xl text-[#1A1A32] dark:text-white'><Link href={'/'}>PEDESTAL</Link></h5>
-        <Image src={Logo} alt='Logo' className='w-[172px] dark:invert'></Image>
+        <h5 className='text-2xl text-[#1A1A32]'><Link href={'/'}>PEDESTAL</Link></h5>
+        <Image src={Logo} alt='Logo' className='w-[172px]'></Image>
       </div>
 
       <div className='order-2 md:order-1 flex flex-col'>
         <div className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
-          <h5 className='text-2xl text-[#1A1A32] dark:text-white'><Link href={'/'}>PEDESTAL</Link></h5>
-          <Image src={Logo} alt='Logo' className='w-[172px] dark:invert'></Image>
+          <h5 className='text-2xl text-[#1A1A32]'><Link href={'/'}>PEDESTAL</Link></h5>
+          <Image src={Logo} alt='Logo' className='w-[172px]'></Image>
         </div>
 
         <div className='flex-1 flex items-center justify-center md:mt-7'>
@@ -90,7 +90,7 @@ export default function Login() {
                       <FormItem className='w-full'>
                         <FormLabel className='text-black text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="Example@email.com" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-[0.6rem] sm:text-xs md:text-sm lg:text-base dark:text-black' {...field} />
+                          <Input placeholder="Example@email.com" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-[0.6rem] sm:text-xs md:text-sm lg:text-base' {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -104,7 +104,7 @@ export default function Login() {
                       <FormItem className='w-full'>
                         <FormLabel className='text-black text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="At least 8 characters" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-[0.6rem] sm:text-xs md:text-sm lg:text-base dark:text-black' type='password' {...field} />
+                          <Input placeholder="At least 8 characters" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-[0.6rem] sm:text-xs md:text-sm lg:text-base' type='password' {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
