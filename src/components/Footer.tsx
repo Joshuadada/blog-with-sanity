@@ -123,10 +123,13 @@ export default function Footer() {
             <Image src={WiseThingLogo} className='w-52 max-w-[180px] sm:w-60 md:w-64 lg:w-72' alt=''></Image>
             <h3 className='text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-7 font-medium'>Turn consumer intelligence into growth</h3>
             <p className='text-center text-xl lg:text-2xl mt-6'>Build, automate, and manage consumer panels with powerful features designed to test and predict real-world consumer behavior.</p>
-            <button className='bg-[#1A1A32] mt-12 flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-3 md:py-4 gap-2 sm:gap-3 md:gap-4 rounded-sm md:rounded-md cursor-pointer'>
-              <div className='h-4 w-4 lg:h-5 lg:w-5 bg-[#A594FD] rounded-full'></div>
-              <span className='text-white text-base sm:text-lg md:text-xl lg:text-2xl font-medium'>Get Started</span>
-            </button>
+
+            <Link href={"https://www.wisethings.co/"}>
+              <button className='bg-[#1A1A32] mt-12 flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-3 md:py-4 gap-2 sm:gap-3 md:gap-4 rounded-sm md:rounded-md cursor-pointer'>
+                <div className='h-4 w-4 lg:h-5 lg:w-5 bg-[#A594FD] rounded-full'></div>
+                <span className='text-white text-base sm:text-lg md:text-xl lg:text-2xl font-medium'>Get Started</span>
+              </button>
+            </Link>
           </div>
 
           <Image src={FooterImg} className='w-xl sm:w-2xl md:w-3xl lg:w-4xl xl:w-5xl max-w-full mx-auto mt-24' alt=''></Image>

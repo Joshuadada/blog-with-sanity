@@ -31,7 +31,7 @@ export const Header = () => {
   useEffect(() => {
     const loginStatus = Cookies.get("pedestalIsLoging");
     setIsLogin(loginStatus === 'true');
-  }, [isLogin]);
+  }, []);
 
   const handleMenu = () => {
     setShowMenu((value: boolean) => {
@@ -42,6 +42,7 @@ export const Header = () => {
   const logout = () => {
     Cookies.remove("pedestalIsLoging")
     setIsLogin(false)
+    location.reload()
   }
 
   const handleSearch = (e: React.FormEvent) => {
