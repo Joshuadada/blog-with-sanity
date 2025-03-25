@@ -17,7 +17,7 @@ const navLinks: { name: string, href: string }[] = [
   { name: 'All Insights', href: '/all-insights' },
   { name: 'Consumer Insights', href: '/consumer-insights' },
   { name: 'Economic Insights', href: '/economic-insights' },
-  { name: 'About', href: '/about' }
+  { name: 'About', href: 'https://www.wisethings.co/pedestal' }
 ]
 
 export const Header = () => {
@@ -59,13 +59,13 @@ export const Header = () => {
 
               return (
                 <Link href={navLink.href} key={navLink.name}>
-                  <li className={`text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${isActive ? 'underline' : ''}`}>{navLink.name}</li>
+                  <li className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${isActive ? 'underline' : ''}`}>{navLink.name}</li>
                 </Link>
               )
             })}
-          <li className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'><Link href={"/login-to-plural"} className='flex items-center gap-0.5 sm:gap-1 2xl:gap-1.5'><span>Log In to Plural</span> <Image src={SlantArr} alt='slant arrow' className='w-5'></Image></Link></li>
+          <li className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'><Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-0.5 sm:gap-1 2xl:gap-1.5'><span>Log In to Plural</span> <Image src={SlantArr} alt='slant arrow' className='w-5'></Image></Link></li>
           <li>
-            <Link href={'/login-to-plural'}><button className='bg-black font-grotesk text-white font-medium px-2 sm:px-3 md:px-3 2xl:px-5 py-0.5 md:py-1 lg:py-1.5 text-[0.6rem] sm:text-xs md:text-sm lg:text-md xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
+            <Link href={'https://www.wisethings.co/contact'}><button className='bg-black font-grotesk text-white font-medium px-2 sm:px-3 md:px-3 2xl:px-5 py-0.5 md:py-1 lg:py-1.5 text-[0.6rem] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
           </li>
         </ul>
       </div>
@@ -108,18 +108,21 @@ export const Header = () => {
 
               return (
                 <Link href={navLink.href} key={navLink.name}>
-                  <li className={`text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${isActive ? 'underline' : ''}`}>{navLink.name}</li>
+                  <li className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${isActive ? 'underline' : ''}`}>{navLink.name}</li>
                 </Link>
               )
             })}
-          <li className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'>
-            <Link href={"/login-to-plural"} className='flex items-center gap-0.5 sm:gap-1 2xl:gap-1.5'>
+          <Link href={'/login'}>
+            <li className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`}>Login</li>
+          </Link>
+          <li className='text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'>
+            <Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-1 2xl:gap-1.5'>
               <span>Log In to Plural</span>
               <Image src={SlantArr} alt='slant arrow' className='w-5'></Image>
             </Link>
           </li>
           <li>
-            <Link href={'/login-to-plural'}><button className='bg-black font-grotesk text-white font-medium px-3 2xl:px-5 py-1.5 text-[0.6rem] sm:text-xs md:text-sm lg:text-md xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
+            <Link href={'https://www.wisethings.co/contact'}><button className='bg-black font-grotesk text-white font-medium px-3 2xl:px-5 py-1.5 text-[0.6rem] text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
           </li>
         </ul>
       </div>

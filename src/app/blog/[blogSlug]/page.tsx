@@ -1,23 +1,68 @@
+"use client"
+
 import Image from 'next/image'
 import { Card } from '@/components/Card'
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel'
 import { getAllBlogs, getAllTags, getBlog } from '@/sanity/sanity-utils'
 import DownloadIcon from '../../../../public/images/icons/download.svg'
 import Link from 'next/link'
-import { BlogResponse } from '@/app/types/blog.type'
+import { BlogPost } from '@/app/types/blog.type'
 import { Tag } from '@/app/types/tag.type'
+import { useParams, useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
 
-type Props = {
-    params: Promise<{ blogSlug: string }>;
-}
+export default function Blog() {
+    const router = useRouter();
 
-export default async function Blog({ params }: Props) {
-    const { blogSlug } = await params;
+    const [recentBlogs, setRecentBlogs] = useState<BlogPost[]>([]);
+    const [blog, setBlog] = useState<BlogPost | null>(null);
+    const [tags, setTags] = useState<Tag[]>([]);
 
-    const blogResponse: BlogResponse = await getAllBlogs(1, 4);
-    const recentBlogs = blogResponse.blogs;
-    const blog = await getBlog(blogSlug);
-    const tags: Tag[] = await getAllTags();
+    
+    const [blogSlug, setBlogSlug] = useState<string>("");
+    const paramsPromise = useParams();
+
+    useEffect(() => {
+        const unwrapParams = () => {
+            const params = paramsPromise;
+            if (params?.blogSlug) {
+                setBlogSlug(params.blogSlug as string);
+            }
+        };
+
+        unwrapParams();
+    }, [paramsPromise]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const blogResponse = await getAllBlogs(1, 4);
+                setRecentBlogs(blogResponse.blogs);
+
+                const blogData = await getBlog(blogSlug);
+                setBlog(blogData);
+
+                const tagsData = await getAllTags();
+                setTags(tagsData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [blogSlug]);
+
+    const onTagClick = (tagName: string) => {
+        tagName = tagName.toLowerCase();
+
+        if (tagName === "economic insights") {
+            router.push('/economic-insights');
+        } else if (tagName === "consumer insights") {
+            router.push('/consumer-insights');
+        } else {
+            router.push(`/all-insights?category=${encodeURIComponent(tagName)}`);
+        }
+    };
 
     return (
         <div>
@@ -83,7 +128,7 @@ export default async function Blog({ params }: Props) {
 
                             {
                                 blog?.sectionOneText?.[0] && (
-                                    <p className='col-span-12 lg:col-span-8 text-xs sm:text-sm md:text-base lg:text-lg'>{blog.sectionOneText[0]}</p>
+                                    <p className='col-span-12 lg:col-span-8 text-sm md:text-base lg:text-lg'>{blog.sectionOneText[0]}</p>
                                 )
                             }
                         </div>
@@ -113,13 +158,13 @@ export default async function Blog({ params }: Props) {
                         <div className='py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-12 md:px-20 lg:px-28 xl:px-40 2xl:px-52'>
                             {
                                 blog?.sectionThreeText?.[0] && (
-                                    <p className='text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl'>{blog.sectionThreeText[0]}</p>
+                                    <p className='text-base md:text-xl lg:text-2xl xl:text-3xl'>{blog.sectionThreeText[0]}</p>
                                 )
                             }
 
                             {
                                 blog?.sectionThreeDescription && (
-                                    <p className='text-center mt-6 sm:mt-7 md:mt-8 lg:mt-10 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase'>{blog.sectionThreeDescription}</p>
+                                    <p className='text-center mt-6 sm:mt-7 md:mt-8 lg:mt-10 text-sm md:text-base lg:text-lg xl:text-xl uppercase'>{blog.sectionThreeDescription}</p>
                                 )
                             }
 
@@ -161,7 +206,7 @@ export default async function Blog({ params }: Props) {
 
                             {
                                 blog?.sectionSixText?.[0] && (
-                                    <p className='text-xs sm:text-sm md:text-base lg:text-lg flex-1'>{blog.sectionSixText[0]}</p>
+                                    <p className='text-sm md:text-base lg:text-lg flex-1'>{blog.sectionSixText[0]}</p>
                                 )
                             }
                         </div>
@@ -171,14 +216,20 @@ export default async function Blog({ params }: Props) {
 
 
             {
-                blog?.sectionSevenCarousel?.length > 0 && (
+                blog && blog?.sectionSevenCarousel && blog?.sectionSevenCarousel?.length > 0 && (
                     <div className='max-w-[1600px] mx-auto'>
                         <Carousel className="w-full max-w-3/4 mx-auto">
                             <CarouselContent>
-                                {blog.sectionSevenCarousel.map((image: {imageUrl: string}, index: string) => (
+                                {blog.sectionSevenCarousel.map((image, index) => (
                                     <CarouselItem key={index}>
                                         <div className="p-1">
-                                            <Image src={image.imageUrl} alt='Image' width={100} height={100} className='max-w-[280px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[590px] w-full aspect-square object-cover mx-auto'></Image>
+                                            <Image
+                                                src={typeof image.imageUrl === 'string' ? image.imageUrl : ''}
+                                                alt='Carousel Image'
+                                                width={590}
+                                                height={590}
+                                                className='max-w-[280px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[590px] w-full aspect-square object-cover mx-auto'
+                                            />
                                         </div>
                                     </CarouselItem>
                                 ))}
@@ -194,7 +245,7 @@ export default async function Blog({ params }: Props) {
                 blog?.sectionEightText?.[0] && (
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-12 md:px-20 lg:px-28 xl:px-40 2xl:px-52'>
-                            <p className='text-xs sm:text-sm md:text-base lg:text-lg'>{blog.sectionEightText[0]}</p>
+                            <p className='text-sm md:text-base lg:text-lg'>{blog.sectionEightText[0]}</p>
                         </div>
                     </div>
                 )
@@ -209,7 +260,7 @@ export default async function Blog({ params }: Props) {
                             <div className='flex items-center justify-center sm:justify-start flex-wrap gap-5 sm:gap-6 md:gap-7 lg:gap-8 mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8'>
                                 {
                                     tags.map((tag: Tag) => (
-                                        <div key={tag._id} className='bg-[#F2F2F7] py-1 sm:py-2 md:py-3 px-4 sm:px-6 md:px-7 lg:px-8 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>{tag.tagName}</div>
+                                        <div key={tag._id} onClick={() => onTagClick(tag.tagName)} className='bg-[#F2F2F7] py-1 sm:py-2 md:py-3 px-4 sm:px-6 md:px-7 lg:px-8 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl text-[0.6rem] sm:text-xs md:text-sm lg:text-base cursor-pointer'>{tag.tagName}</div>
                                     ))
                                 }
                             </div>
@@ -222,7 +273,7 @@ export default async function Blog({ params }: Props) {
                 recentBlogs?.length > 0 && (
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='py-6 sm:py-7 md:py-8 lg:py-10 xl:py-12 2xl:py-14 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
-                            <h4 className='font-grotesk text-center text-xs sm:text-sm md:text-base lg:text-lg uppercase'>Recent DATA AND INSIGHTS</h4>
+                            <h4 className='font-grotesk text-center text-sm md:text-base lg:text-lg uppercase'>Recent DATA AND INSIGHTS</h4>
 
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6 sm:gap-y-8 md:gap-y-10 lg:gap-y-12 mt-6 sm:mt-7 md:mt-8 lg:mt-9 xl:mt-10 2xl:mt-12'>
                                 {
