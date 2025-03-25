@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import LoginImg from "../../../public/images/login-img.svg"
 import Logo from "../../../public/images/wise-thing-logo.svg"
@@ -9,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
+import Cookies from "js-cookie";
+
 import {
   Form,
   FormControl,
@@ -19,6 +21,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { baseUrl } from '../../../env'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   email: z.string().email('Invalid Email'),
@@ -29,6 +33,8 @@ const formSchema = z.object({
 
 export default function Login() {
   const date = new Date();
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,9 +44,10 @@ export default function Login() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true)
     const apiUrl = `${baseUrl}/auth/login`
+
     fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -48,33 +55,36 @@ export default function Login() {
       },
       body: JSON.stringify(values),
     })
-      .then(response => {
+      .then(async (response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          const errorData = await response.json();
+          throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
         }
         return response.json();
       })
-      .then(newUserData => {
-        // Process the newly created user data
-        console.log('New User Data:', newUserData);
+      .then(response => {
+        toast.success(response.message)
+        Cookies.set("pedestalIsLoging", "true", { expires: 7 });
+        router.push('/')
       })
       .catch(error => {
-        // console.error('Error:', error);
-        alert(error)
-      });
+        console.error('Error:', error);
+        toast.error(error.message);
+      }).finally(() => setIsLoading(false));
+
   }
 
   return (
     <div className='flex flex-col md:grid grid-cols-1 md:grid-cols-2 gap-y-7 md:h-screen p-6 sm:p-7 md:p-8 max-w-[1600px] mx-auto'>
-      <div className='flex md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
+      <div className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
         <h5 className='text-2xl text-[#1A1A32]'><Link href={'/'}>PEDESTAL</Link></h5>
-        <Image src={Logo} alt='Logo' className='w-[172px]'></Image>
+        <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
       </div>
 
       <div className='order-2 md:order-1 flex flex-col'>
         <div className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
           <h5 className='text-2xl text-[#1A1A32]'><Link href={'/'}>PEDESTAL</Link></h5>
-          <Image src={Logo} alt='Logo' className='w-[172px]'></Image>
+          <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
         </div>
 
         <div className='flex-1 flex items-center justify-center md:mt-7'>
@@ -115,19 +125,19 @@ export default function Login() {
                     <Link href='' className='text-[#A594FD] font-semibold text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>Forgot Password?</Link>
                   </div>
 
-                  <Button className='w-full' type="submit">Sign in</Button>
+                  <Button className='w-full' type="submit">{isLoading ? 'Loading...' : 'Sign in'}</Button>
                 </form>
               </Form>
             </div>
 
-            <p className='text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 text-[#AEAEB2] text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>© {date.getFullYear()} ALL RIGHTS RESERVED</p>
+            <p className='text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 text-[#AEAEB2] text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>© {date.getFullYear()} WISE THINGS ALL RIGHTS RESERVED</p>
           </div>
         </div>
       </div>
 
       <div className='order-1 md:order-2 md:h-full overflow-y-hidden relative'>
         <p className='absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white text-2xl md:text-3xl text-center w-full uppercase font-glyphic px-4'>Make the right decision every time</p>
-        <Image src={LoginImg} alt='Login Image' className='aspect-square md:h-full w-full object-cover rounded-xl lg:rounded-2xl xl:rounded-3xl'></Image>
+        <Image src={LoginImg} quality={100} alt='Login Image' className='aspect-square md:h-full w-full object-cover rounded-xl lg:rounded-2xl xl:rounded-3xl'></Image>
       </div>
     </div>
   )

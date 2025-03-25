@@ -15,12 +15,13 @@ export default function AllInsights() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
+  const category = searchParams.get("category") || "";
   const blogsPerPage = 24;
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const blogResponse: BlogResponse = await getAllBlogs(currentPage, blogsPerPage, search);
+        const blogResponse: BlogResponse = await getAllBlogs(currentPage, blogsPerPage, search, category);
         setBlogs(blogResponse.blogs);
         setTotalBlogs(blogResponse.total);
       } catch (error) {
@@ -31,7 +32,7 @@ export default function AllInsights() {
     };
 
     fetchBlogs();
-  }, [currentPage, search]);
+  }, [currentPage, search, category]);
 
   return (
     <MainLayout>
