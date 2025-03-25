@@ -70,8 +70,8 @@ export default function Main() {
         {isLoading && <p className="text-center text-sm my-5">Fetching data...</p>}
         {
           headlineBlogs?.length > 0 && !isLoading &&
-          <Link href={isLogin ? `/blog/${headlineBlogs[0]?.slug}` : ""}>
-            <div className={`max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 items-start py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-28 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32 ${isLogin ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
+          <Link href={isLogin ? `/blog/${headlineBlogs[0]?.slug}` : "/login"}>
+            <div className={`max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 items-start py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-28 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32`}>
               <div className='order-2 md:order-1 flex flex-col gap-8 sm:gap-10 md:gap-16 lg:gap-24 xl:gap-36 2xl:gap-40'>
                 <div className='flex flex-col gap-1'>
                   <p className='font-grotesk font-light text-[0.6rem] lg:text-xs uppercase'>{headlineBlogs[0]?.category?.tagName}</p>
@@ -100,9 +100,9 @@ export default function Main() {
 
         {
           featureBlogs?.length > 0 &&
-          <Link href={isLogin ? `/blog/${featureBlogs[0]?.slug}` : ""}>
+          <Link href={isLogin ? `/blog/${featureBlogs[0]?.slug}` : "/login"}>
             <div className='max-w-[1600px] mx-auto'>
-              <div className={`flex flex-col w-full items-center mx-auto gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 max-w-[823px] py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 2xl:py-[107px] px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32 ${isLogin ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
+              <div className={`flex flex-col w-full items-center mx-auto gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 max-w-[823px] py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 2xl:py-[107px] px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32`}>
                 <div className='relative'>
                   <Image src={featureBlogs[0]?.image || ''} quality={100} height={100} width={100} alt={featureBlogs[0]?.title} className='w-[826px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl aspect-[6/4] object-cover'></Image>
                   {

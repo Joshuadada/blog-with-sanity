@@ -23,8 +23,8 @@ export function Card({ img, imageAlt, category, title, description, slug }: Card
     }, []);
 
     return (
-        <Link href={isLogin ? `/blog/${slug}` : ''}>
-            <div className={isLogin ? 'cursor-pointer' : 'cursor-not-allowed'}>
+        <Link href={isLogin ? `/blog/${slug}` : '/login'}>
+            <div>
                 <div className='aspect-[6/5] relative'>
                     <Image src={img} alt={imageAlt} width={100} height={100} quality={100} className='w-full h-full object-cover rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl aspect-video'></Image>
                     {
