@@ -6,7 +6,8 @@ import { BlogPost } from "@/app/types/blog.type";
 export async function getAllBlogs(
   page = 1,
   limit = 24,
-  search = ""
+  search = "",
+  category = ""
 ): Promise<{ blogs: BlogPost[]; total: number }> {
   const startIndex = (page - 1) * limit;
   const endIndex = startIndex + limit;
@@ -14,12 +15,14 @@ export async function getAllBlogs(
   return client.fetch(
     groq`
       {
-        "total": count(*[_type == "blog" ${
-          search ? `&& (title match "*${search}*" || description match "*${search}*")` : ""
-        }]),
-        "blogs": *[_type == "blog" ${
-          search ? `&& (title match "*${search}*" || description match "*${search}*")` : ""
-        }] | order(_createdAt desc) [${startIndex}...${endIndex}] {
+        "total": count(*[_type == "blog"
+          ${category ? `&& lower(category->tagName) == lower("${category}")` : ""}
+          ${search ? `&& (title match "*${search}*" || description match "*${search}*")` : ""}
+        ]),
+        "blogs": *[_type == "blog"
+          ${category ? `&& lower(category->tagName) == lower("${category}")` : ""}
+          ${search ? `&& (title match "*${search}*" || description match "*${search}*")` : ""}
+        ] | order(_createdAt desc) [${startIndex}...${endIndex}] {
           _id,
           _createdAt,
           title,
@@ -36,6 +39,7 @@ export async function getAllBlogs(
     `
   );
 }
+
 
 
 export async function getConsumerBlogs(
