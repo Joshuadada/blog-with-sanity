@@ -126,9 +126,10 @@ export const Header = () => {
                 </Link>
               )
             })}
-          <Link href={'/login'}>
-            <li className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`}>Login</li>
-          </Link>
+
+          {!isLogin && <Link href={'/login'} className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`}>Log In</Link>}
+          {isLogin && <p className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`} onClick={logout}>Log Out</p>}
+
           <li className='text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'>
             <Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-1 2xl:gap-1.5'>
               <span>Log In to Plural</span>
