@@ -122,7 +122,7 @@ export default function Login() {
                   />
 
                   <div className='flex justify-end'>
-                    <Link href='' className='text-[#A594FD] font-semibold text-sm lg:text-base'>Forgot Password?</Link>
+                    <Link href='mailto:forgotpassword@wisethings.co' className='text-[#A594FD] font-semibold text-sm lg:text-base'>Forgot Password?</Link>
                   </div>
 
                   <Button className='w-full' type="submit">{isLoading ? 'Loading...' : 'Sign in'}</Button>
