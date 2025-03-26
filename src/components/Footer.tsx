@@ -120,7 +120,7 @@ export default function Footer() {
       <div className='bg-[#A594FD]'>
         <div className='max-w-[1600px] mx-auto px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 py-16 lg:py-20 xl:py-24 2xl:py-28'>
           <div className='flex flex-col justify-center items-center mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-[736px]'>
-            <Image src={WiseThingLogo} className='w-52 max-w-[180px] sm:w-60 md:w-64 lg:w-72' alt=''></Image>
+            <Image quality={100} src={WiseThingLogo} className='w-52 max-w-[180px] sm:w-60 md:w-64 lg:w-72' alt=''></Image>
             <h3 className='text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-7 font-medium'>Turn consumer intelligence into growth</h3>
             <p className='text-center text-xl lg:text-2xl mt-6'>Build, automate, and manage consumer panels with powerful features designed to test and predict real-world consumer behavior.</p>
 
@@ -132,7 +132,7 @@ export default function Footer() {
             </Link>
           </div>
 
-          <Image src={FooterImg} className='w-xl sm:w-2xl md:w-3xl lg:w-4xl xl:w-5xl max-w-full mx-auto mt-24' alt=''></Image>
+          <Image quality={100} src={FooterImg} className='w-xl sm:w-2xl md:w-3xl lg:w-4xl xl:w-5xl max-w-full mx-auto mt-24' alt=''></Image>
         </div>
       </div>
 
