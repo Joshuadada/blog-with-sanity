@@ -76,16 +76,16 @@ export default function Login() {
 
   return (
     <div className='flex flex-col md:grid grid-cols-1 md:grid-cols-2 gap-y-7 md:h-screen p-6 sm:p-7 md:p-8 max-w-[1600px] mx-auto'>
-      <div className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
-        <h5 className='text-2xl text-[#1A1A32]'><Link href={'/'}>PEDESTAL</Link></h5>
-        <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
-      </div>
+        <Link href={'https://www.wisethings.co'} className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
+          <h5 className='text-2xl text-[#1A1A32]'>PEDESTAL</h5>
+          <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
+        </Link>
 
       <div className='order-2 md:order-1 flex flex-col'>
-        <div className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
-          <h5 className='text-2xl text-[#1A1A32]'><Link href={'/'}>PEDESTAL</Link></h5>
-          <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
-        </div>
+          <Link href={'https://www.wisethings.co'} className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
+            <h5 className='text-2xl text-[#1A1A32]'>PEDESTAL</h5>
+            <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
+          </Link>
 
         <div className='flex-1 flex items-center justify-center md:mt-7'>
           <div className='md:max-w-[388px] w-full md:pr-8'>
@@ -98,9 +98,9 @@ export default function Login() {
                     name="email"
                     render={({ field }) => (
                       <FormItem className='w-full'>
-                        <FormLabel className='text-black text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>Email</FormLabel>
+                        <FormLabel className='text-black text-sm lg:text-base'>Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="Example@email.com" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-[0.6rem] sm:text-xs md:text-sm lg:text-base' {...field} />
+                          <Input placeholder="Example@email.com" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-sm lg:text-base' {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -112,9 +112,9 @@ export default function Login() {
                     name="password"
                     render={({ field }) => (
                       <FormItem className='w-full'>
-                        <FormLabel className='text-black text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>Password</FormLabel>
+                        <FormLabel className='text-black text-sm lg:text-base'>Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="At least 8 characters" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-[0.6rem] sm:text-xs md:text-sm lg:text-base' type='password' {...field} />
+                          <Input placeholder="At least 8 characters" className='bg-[#F7FBFF] border-[#D4D7E3] placeholder:font-medium placeholder:text-[#8897AD] p-4 text-sm lg:text-base' type='password' {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -122,7 +122,7 @@ export default function Login() {
                   />
 
                   <div className='flex justify-end'>
-                    <Link href='' className='text-[#A594FD] font-semibold text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>Forgot Password?</Link>
+                    <Link href='' className='text-[#A594FD] font-semibold text-sm lg:text-base'>Forgot Password?</Link>
                   </div>
 
                   <Button className='w-full' type="submit">{isLoading ? 'Loading...' : 'Sign in'}</Button>
@@ -130,7 +130,7 @@ export default function Login() {
               </Form>
             </div>
 
-            <p className='text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 text-[#AEAEB2] text-[0.6rem] sm:text-xs md:text-sm lg:text-base'>© {date.getFullYear()} WISE THINGS ALL RIGHTS RESERVED</p>
+            <p className='text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 text-[#AEAEB2] text-sm lg:text-base'>© {date.getFullYear()} WISE THINGS ALL RIGHTS RESERVED</p>
           </div>
         </div>
       </div>
