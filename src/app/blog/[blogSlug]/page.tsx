@@ -10,6 +10,8 @@ import { BlogPost } from '@/app/types/blog.type'
 import { Tag } from '@/app/types/tag.type'
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { urlFor } from '@/sanity/lib/client'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 export default function Blog() {
     const router = useRouter();
@@ -18,7 +20,7 @@ export default function Blog() {
     const [blog, setBlog] = useState<BlogPost | null>(null);
     const [tags, setTags] = useState<Tag[]>([]);
 
-    
+
     const [blogSlug, setBlogSlug] = useState<string>("");
     const paramsPromise = useParams();
 
@@ -71,7 +73,14 @@ export default function Blog() {
                     {
                         blog?.titleImageUrl && (
                             <div>
-                                <Image src={blog.titleImageUrl} alt='Hero Image' width={100} height={100} className='w-[823px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                <Dialog>
+                                    <DialogTrigger><Image src={urlFor(blog.titleImageUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[823px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl cursor-pointer'></Image></DialogTrigger>
+                                    <DialogContent>
+                                        <div w-5o>
+                                            <Image src={urlFor(blog.titleImageUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         )
                     }
@@ -121,8 +130,16 @@ export default function Blog() {
                             {
                                 blog?.sectionOneImgUrl && (
                                     <div className='col-span-12 lg:col-span-4'>
-                                        <Image src={blog.sectionOneImgUrl} alt='Section one image' height={100} width={100} className='w-full aspect-[2/3] object-cover max-w-[473px] mx-auto'></Image>
+                                        <Dialog>
+                                            <DialogTrigger><Image src={urlFor(blog.sectionOneImgUrl)} unoptimized={true} alt='Section one image' height={100} width={100} className='w-full aspect-[2/3] object-cover max-w-[473px] mx-auto cursor-pointer'></Image></DialogTrigger>
+                                            <DialogContent>
+                                                <div w-5o>
+                                                    <Image src={urlFor(blog.sectionOneImgUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
                                     </div>
+
                                 )
                             }
 
@@ -141,11 +158,29 @@ export default function Blog() {
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-9 lg:gap-10 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-16 md:px-28 lg:px-40 xl:px-52 2xl:px-64'>
                             {
-                                blog?.sectionTwoImgOneUrl && <Image src={blog.sectionTwoImgOneUrl} width={100} height={100} alt='section Two Img One' className='w-full aspect-square object-cover mx-auto'></Image>
+                                blog?.sectionTwoImgOneUrl && (
+                                    <Dialog>
+                                        <DialogTrigger><Image src={urlFor(blog.sectionTwoImgOneUrl)} unoptimized={true} width={100} height={100} alt='section Two Img One' className='w-full aspect-square object-cover mx-auto'></Image></DialogTrigger>
+                                        <DialogContent>
+                                            <div w-5o>
+                                                <Image src={urlFor(blog.sectionTwoImgOneUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
+                                )
                             }
 
                             {
-                                blog?.sectionTwoImgTwoUrl && <Image src={blog.sectionTwoImgTwoUrl} width={100} height={100} alt='section Two Img Two' className='w-full aspect-square object-cover mx-auto'></Image>
+                                blog?.sectionTwoImgTwoUrl && (
+                                    <Dialog>
+                                        <DialogTrigger><Image src={urlFor(blog.sectionTwoImgTwoUrl)} unoptimized={true} width={100} height={100} alt='section Two Img Two' className='w-full aspect-square object-cover mx-auto'></Image></DialogTrigger>
+                                        <DialogContent>
+                                            <div w-5o>
+                                                <Image src={urlFor(blog.sectionTwoImgTwoUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
+                                )
                             }
                         </div>
                     </div>
@@ -167,8 +202,6 @@ export default function Blog() {
                                     <p className='text-center mt-6 sm:mt-7 md:mt-8 lg:mt-10 text-sm md:text-base lg:text-lg xl:text-xl uppercase'>{blog.sectionThreeDescription}</p>
                                 )
                             }
-
-
                         </div>
                     </div>
                 )
@@ -178,7 +211,14 @@ export default function Blog() {
                 blog?.sectionFourImgUrl && (
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='py-1 sm:py-2 md:py-3 lg:py-4 xl:py-5 2xl:py-6 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
-                            <Image src={blog.sectionFourImgUrl} alt='Section Four Img' width={100} height={100} className='w-full aspect-[3/2] object-cover mx-auto max-w-[853px]'></Image>
+                            <Dialog>
+                                <DialogTrigger><Image src={urlFor(blog.sectionFourImgUrl)} unoptimized={true} alt='Section Four Img' width={100} height={100} className='w-full aspect-[3/2] object-cover mx-auto max-w-[853px]'></Image></DialogTrigger>
+                                <DialogContent>
+                                    <div w-5o>
+                                        <Image src={urlFor(blog.sectionFourImgUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                         </div>
                     </div>
                 )
@@ -188,7 +228,14 @@ export default function Blog() {
                 blog?.sectionFiveImgUrl && (
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32 w-full '>
-                            <Image src={blog.sectionFiveImgUrl} alt='Section Five Img' width={100} height={100} className='w-full aspect-[2/1] object-cover mx-auto'></Image>
+                            <Dialog>
+                                <DialogTrigger><Image src={urlFor(blog.sectionFiveImgUrl)} unoptimized={true} alt='Section Five Img' width={100} height={100} className='w-full aspect-[2/1] object-cover mx-auto'></Image></DialogTrigger>
+                                <DialogContent>
+                                    <div w-5o>
+                                        <Image src={urlFor(blog.sectionFiveImgUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                         </div>
                     </div>
                 )
@@ -200,7 +247,14 @@ export default function Blog() {
                         <div className='flex items-start flex-col xl:flex-row gap-6 sm:gap-8 md:gap-9 lg:gap-10 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-12 md:px-20 lg:px-28 xl:px-40 2xl:px-52'>
                             {
                                 blog?.sectionSixImgUrl && (
-                                    <Image src={blog.sectionSixImgUrl} alt='Section Six Img' width={100} height={100} className='w-full aspect-[7/6] object-cover mx-auto lg:max-w-[473px]'></Image>
+                                    <Dialog>
+                                        <DialogTrigger><Image src={urlFor(blog.sectionSixImgUrl)} unoptimized={true} alt='Section Six Img' width={100} height={100} className='w-full aspect-[7/6] object-cover mx-auto lg:max-w-[473px]'></Image></DialogTrigger>
+                                        <DialogContent>
+                                            <div w-5o>
+                                                <Image src={urlFor(blog.sectionSixImgUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
                                 )
                             }
 
@@ -224,7 +278,8 @@ export default function Blog() {
                                     <CarouselItem key={index}>
                                         <div className="p-1">
                                             <Image
-                                                src={typeof image.imageUrl === 'string' ? image.imageUrl : ''}
+                                                src={typeof image.imageUrl === 'string' ? urlFor(image.imageUrl) : ''}
+                                                unoptimized={true}
                                                 alt='Carousel Image'
                                                 width={590}
                                                 height={590}

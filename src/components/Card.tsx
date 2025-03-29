@@ -4,6 +4,7 @@ import LockIcon from '../../public/images/icons/lock.svg'
 import Link from 'next/link'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import Cookies from "js-cookie";
+import { urlFor } from '@/sanity/lib/client'
 
 interface Card {
     img: string | StaticImport,
@@ -26,7 +27,15 @@ export function Card({ img, imageAlt, category, title, description, slug }: Card
         <Link href={isLogin ? `/blog/${slug}` : '/login'}>
             <div>
                 <div className='aspect-[6/5] relative'>
-                    <Image src={img} alt={imageAlt} width={100} height={100} quality={100} className='w-full h-full object-cover rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl aspect-video'></Image>
+                    <Image
+                        src={urlFor(img)}
+                        alt={imageAlt}
+                        width={100}
+                        height={100}
+                        className="w-full h-full object-cover rounded-md"
+                        unoptimized={true}
+                    />
+                    
                     {
                         !isLogin && (
                             <div className='h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex items-center justify-center rounded-full bg-[#A594FD] absolute top-1 right-1 sm:top-1.5 sm:right-1.5 md:top-2 md:right-2 lg:top-2.5 lg:right-2.5'>
