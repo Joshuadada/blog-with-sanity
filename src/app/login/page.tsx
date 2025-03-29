@@ -78,7 +78,7 @@ export default function Login() {
     <div className='flex flex-col md:grid grid-cols-1 md:grid-cols-2 gap-y-7 md:h-screen p-6 sm:p-7 md:p-8 max-w-[1600px] mx-auto'>
         <Link href={'https://www.wisethings.co'} className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
           <h5 className='text-2xl text-[#1A1A32]'>PEDESTAL</h5>
-          <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
+          <Image src={Logo} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
         </Link>
 
       <div className='order-2 md:order-1 flex flex-col'>
