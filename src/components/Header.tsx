@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import SlantArr from "../../public/images/icons/slant-arr.svg"
 import SearchIcon from "../../public/images/icons/search.svg"
@@ -12,6 +12,7 @@ import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTr
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { Search } from 'lucide-react'
+import Cookies from "js-cookie";
 
 const navLinks: { name: string, href: string }[] = [
   { name: 'All Insights', href: '/all-insights' },
@@ -25,11 +26,23 @@ export const Header = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [showMenu, setShowMenu] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false)
+
+  useEffect(() => {
+    const loginStatus = Cookies.get("pedestalIsLoging");
+    setIsLogin(loginStatus === 'true');
+  }, []);
 
   const handleMenu = () => {
     setShowMenu((value: boolean) => {
       return !value
     })
+  }
+
+  const logout = () => {
+    Cookies.remove("pedestalIsLoging")
+    setIsLogin(false)
+    location.reload()
   }
 
   const handleSearch = (e: React.FormEvent) => {
@@ -94,7 +107,8 @@ export const Header = () => {
         </Dialog>
 
         <Image src={HambuggerIcon} alt='hambugger icon' className='block xl:hidden w-5 md:w-6' onClick={handleMenu}></Image>
-        <Link href={'/login'} className='hidden xl:block text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium cursor-pointer'>Log In</Link>
+        {!isLogin && <Link href={'/login'} className='hidden xl:block text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium cursor-pointer'>Log In</Link>}
+        {isLogin && <p className='hidden xl:block text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium cursor-pointer' onClick={logout}>Log Out</p>}
       </div>
 
       <div className={`fixed z-50 bg-white top-0 bottom-0 w-full sm:max-w-[390px] h-screen shadow-md px-4 py-6 transform ${showMenu ? 'right-0' : '-right-[600px]'}`}>
@@ -112,9 +126,10 @@ export const Header = () => {
                 </Link>
               )
             })}
-          <Link href={'/login'}>
-            <li className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`}>Login</li>
-          </Link>
+
+          {!isLogin && <Link href={'/login'} className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`}>Log In</Link>}
+          {isLogin && <p className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`} onClick={logout}>Log Out</p>}
+
           <li className='text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'>
             <Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-1 2xl:gap-1.5'>
               <span>Log In to Plural</span>
