@@ -76,16 +76,22 @@ export default function Login() {
 
   return (
     <div className='flex flex-col md:grid grid-cols-1 md:grid-cols-2 gap-y-7 md:h-screen p-6 sm:p-7 md:p-8 max-w-[1600px] mx-auto'>
-        <Link href={'https://www.wisethings.co'} className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
-          <h5 className='text-2xl text-[#1A1A32]'>PEDESTAL</h5>
+      <div className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
+        <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
+        
+        <Link href={'https://www.wisethings.co'}>
           <Image src={Logo} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
         </Link>
+      </div>
 
       <div className='order-2 md:order-1 flex flex-col'>
-          <Link href={'https://www.wisethings.co'} className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
-            <h5 className='text-2xl text-[#1A1A32]'>PEDESTAL</h5>
+        <div className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
+          <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
+
+          <Link href={'https://www.wisethings.co'}>
             <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
           </Link>
+        </div>
 
         <div className='flex-1 flex items-center justify-center md:mt-7'>
           <div className='md:max-w-[388px] w-full md:pr-8'>
