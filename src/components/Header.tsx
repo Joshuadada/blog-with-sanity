@@ -41,8 +41,9 @@ export const Header = () => {
 
   const logout = () => {
     Cookies.remove("pedestalIsLoging")
-    setIsLogin(false)
-    location.reload()
+    setIsLogin(false);
+    router.push('/')
+    setTimeout(() => location.reload(), 200)
   }
 
   const handleSearch = (e: React.FormEvent) => {
