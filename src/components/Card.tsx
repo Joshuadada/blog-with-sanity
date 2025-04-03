@@ -46,7 +46,7 @@ export function Card({ img, imageAlt, category, title, description, slug }: Card
                 </div>
                 <p className='font-grotesk font-light text-[0.6rem] lg:text-xs uppercase mt-2 lg:mt-3'>{category}</p>
                 <h4 className='text-sm sm:text-base md:text-lg lg:text-xl font-glyphic mt-2 md:mt-3 lg:mt-4'>{title}</h4>
-                <p className='font-grotesk font-light text-xs md:text-sm lg:text-base mt-1 md:mt-2 lg:mt-3'>{description.length > 80 ? description.slice(0, 80) + "..." : description}</p>
+                <p className='font-grotesk font-light text-xs md:text-sm lg:text-base mt-1 md:mt-2 lg:mt-3'>{description?.length > 80 ? description?.slice(0, 80) + "..." : description}</p>
             </div>
         </Link>
     )

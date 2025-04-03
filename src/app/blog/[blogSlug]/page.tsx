@@ -12,6 +12,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { urlFor } from '@/sanity/lib/client'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import DOMPurify from 'dompurify';
 
 export default function Blog() {
     const router = useRouter();
@@ -74,10 +75,10 @@ export default function Blog() {
                         blog?.titleImageUrl && (
                             <div>
                                 <Dialog>
-                                    <DialogTrigger><Image src={urlFor(blog.titleImageUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[823px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl cursor-pointer'></Image></DialogTrigger>
+                                    <DialogTrigger><Image src={urlFor(blog.titleImageUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[823px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl cursor-pointer aspect-3/2 object-cover'></Image></DialogTrigger>
                                     <DialogContent>
-                                        <div w-5o>
-                                            <Image src={urlFor(blog.titleImageUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl'></Image>
+                                        <div >
+                                            <Image src={urlFor(blog.titleImageUrl)} unoptimized={true} alt='Hero Image' width={100} height={100} className='w-[2000px] max-w-full rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl  aspect-3/2 object-cover'></Image>
                                         </div>
                                     </DialogContent>
                                 </Dialog>
@@ -98,11 +99,12 @@ export default function Blog() {
                             )
                         }
 
-                        {
-                            blog?.description && (
-                                <p className='font-grotesk text-xs md:text-sm lg:text-base'>{blog.description}</p>
-                            )
-                        }
+                        {blog?.description && (
+                            <p
+                                className="font-grotesk text-xs md:text-sm lg:text-base"
+                                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.description) }}
+                            />
+                        )}
 
                         {
                             blog?.pdfUrl && (
@@ -145,7 +147,7 @@ export default function Blog() {
 
                             {
                                 blog?.sectionOneText?.[0] && (
-                                    <p className='col-span-12 lg:col-span-8 text-sm md:text-base lg:text-lg'>{blog.sectionOneText[0]}</p>
+                                    <p className='col-span-12 lg:col-span-8 text-sm md:text-base lg:text-lg' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.sectionOneText[0]) }} />
                                 )
                             }
                         </div>
@@ -193,13 +195,13 @@ export default function Blog() {
                         <div className='py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-12 md:px-20 lg:px-28 xl:px-40 2xl:px-52'>
                             {
                                 blog?.sectionThreeText?.[0] && (
-                                    <p className='text-base md:text-xl lg:text-2xl xl:text-3xl'>{blog.sectionThreeText[0]}</p>
+                                    <p className='text-base md:text-xl lg:text-2xl xl:text-3xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.sectionThreeText[0]) }} />
                                 )
                             }
 
                             {
                                 blog?.sectionThreeDescription && (
-                                    <p className='text-center mt-6 sm:mt-7 md:mt-8 lg:mt-10 text-sm md:text-base lg:text-lg xl:text-xl uppercase'>{blog.sectionThreeDescription}</p>
+                                    <p className='text-center mt-6 sm:mt-7 md:mt-8 lg:mt-10 text-sm md:text-base lg:text-lg xl:text-xl uppercase' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.sectionThreeDescription) }} />
                                 )
                             }
                         </div>
@@ -260,7 +262,7 @@ export default function Blog() {
 
                             {
                                 blog?.sectionSixText?.[0] && (
-                                    <p className='text-sm md:text-base lg:text-lg flex-1'>{blog.sectionSixText[0]}</p>
+                                    <p className='text-sm md:text-base lg:text-lg flex-1' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.sectionSixText[0]) }} />
                                 )
                             }
                         </div>
@@ -300,14 +302,14 @@ export default function Blog() {
                 blog?.sectionEightText?.[0] && (
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-8 sm:px-12 md:px-20 lg:px-28 xl:px-40 2xl:px-52'>
-                            <p className='text-sm md:text-base lg:text-lg'>{blog.sectionEightText[0]}</p>
+                            <p className='text-sm md:text-base lg:text-lg' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.sectionEightText[0]) }} />
                         </div>
                     </div>
                 )
             }
 
             {
-                tags.length > 0 && (
+                tags?.length > 0 && (
                     <div className='max-w-[1600px] mx-auto'>
                         <div className='py-6 sm:py-7 md:py-8 lg:py-10 xl:py-12 2xl:py-14 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-28 2xl:px-32'>
                             <h4 className='font-grotesk text-center text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm uppercase'>ALL TAGS</h4>
