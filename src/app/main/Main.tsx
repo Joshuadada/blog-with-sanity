@@ -79,11 +79,11 @@ export default function Main() {
                   <p className='font-grotesk font-light text-[0.6rem] lg:text-xs uppercase'>{headlineBlogs[0]?.category?.tagName}</p>
                   <h3 className='text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl 2xl:text-8xl font-glyphic lg:leading-16 xl:leading-20 2xl:leading-24'>{headlineBlogs[0]?.title}</h3>
                 </div>
-                <p className='font-grotesk text-xs md:text-sm lg:text-base'>{headlineBlogs[0]?.description.length > 200 ? headlineBlogs[0]?.description.slice(0, 200) + "..." : headlineBlogs[0]?.description}</p>
+                <p className='font-grotesk text-xs md:text-sm lg:text-base'>{headlineBlogs[0]?.description?.length > 200 ? headlineBlogs[0]?.description?.slice(0, 200) + "..." : headlineBlogs[0]?.description}</p>
               </div>
 
               <div className='order-1 md:order-2 relative'>
-                <Image src={urlFor(headlineBlogs[0].image as SanityImageSource)} quality={100} alt={headlineBlogs[0]?.title} height={100} width={100} className='w-full aspect-square object-cover rounded-[10px] md:rounded-[12px] lg:rounded-[15px]' unoptimized={true}></Image>
+                <Image src={urlFor(headlineBlogs[0]?.image as SanityImageSource)} quality={100} alt={headlineBlogs[0]?.title} height={100} width={100} className='w-full aspect-square object-cover rounded-[10px] md:rounded-[12px] lg:rounded-[15px]' unoptimized={true}></Image>
                 {
                   !isLogin && (
                     <div className='h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex items-center justify-center rounded-full bg-[#A594FD] absolute top-1 right-1 sm:top-1.5 sm:right-1.5 md:top-2 md:right-2 lg:top-2.5 lg:right-2.5'>
@@ -121,7 +121,7 @@ export default function Main() {
 
                   <h3 className='text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl 2xl:text-7xl font-glyphic lg:leading-16 xl:leading-20 2xl:leading-24'>{featureBlogs[0]?.title}</h3>
 
-                  <p className='font-grotesk text-xs md:text-sm lg:text-base'>{featureBlogs[0]?.description.length > 200 ? featureBlogs[0]?.description.slice(0, 200) + "..." : featureBlogs[0]?.description}</p>
+                  <p className='font-grotesk text-xs md:text-sm lg:text-base'>{featureBlogs[0]?.description?.length > 200 ? featureBlogs[0]?.description?.slice(0, 200) + "..." : featureBlogs[0]?.description}</p>
                 </div>
               </div>
             </div>
