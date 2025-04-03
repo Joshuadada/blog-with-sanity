@@ -43,7 +43,7 @@ export default function ConsumerInsights() {
 
         {isLoading && <p className="text-center text-sm mt-5">Fetching data...</p>}
 
-        {!isLoading && blogs.length === 0 && (
+        {!isLoading && blogs?.length === 0 && (
           <p className="text-center text-sm mt-4">No insights available.</p>
         )}
 

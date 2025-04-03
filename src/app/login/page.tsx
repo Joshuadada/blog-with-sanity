@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import LoginImg from "../../../public/images/login-img.svg"
-import Logo from "../../../public/images/wise-thing-logo.svg"
 import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -80,7 +79,7 @@ export default function Login() {
         <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
         
         <Link href={'https://www.wisethings.co'}>
-          <Image src={Logo} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
+          <Image src={'https://framerusercontent.com/images/ysVyiAjOVpxgT0M5l3eBoqAPz9o.svg?scale-down-to=512'} width={100} height={100} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
         </Link>
       </div>
 
@@ -89,7 +88,7 @@ export default function Login() {
           <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
 
           <Link href={'https://www.wisethings.co'}>
-            <Image src={Logo} quality={100} alt='Logo' className='w-[172px]'></Image>
+            <Image src={'https://framerusercontent.com/images/ysVyiAjOVpxgT0M5l3eBoqAPz9o.svg?scale-down-to=512'} width={100} height={100} quality={100} alt='Logo' className='w-[172px]'></Image>
           </Link>
         </div>
 
