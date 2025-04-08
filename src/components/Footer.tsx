@@ -132,7 +132,9 @@ export default function Footer() {
             </Link>
           </div>
 
-          <Image quality={100} src={FooterImg} className='w-xl sm:w-2xl md:w-3xl lg:w-4xl xl:w-5xl max-w-full mx-auto mt-24' alt=''></Image>
+          <Image quality={100} src={FooterImg} width={600} height={400} className='w-xl sm:w-2xl md:w-3xl lg:w-4xl xl:w-5xl max-w-full mx-auto mt-24 hidden md:block' alt='footer image'></Image>
+          <Image quality={100} src={'https://drive.google.com/uc?export=view&id=1GCguWWadXs5tiO7KViD_52qB0cxrWc7l'} width={600}
+            height={400} className='w-xl sm:w-2xl md:w-3xl lg:w-4xl xl:w-5xl max-w-full mx-auto mt-24 block md:hidden' alt='footer image'></Image>
         </div>
       </div>
 
