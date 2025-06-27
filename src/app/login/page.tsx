@@ -80,7 +80,7 @@ export default function Login() {
         <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
         
         <Link href={'https://corvane.com'}>
-          <Image src={CorvaneLogo} width={100} height={100} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
+          <Image src={CorvaneLogo} width={100} height={100} unoptimized={true} quality={100} alt='Logo' className='w-[160px]'></Image>
         </Link>
       </div>
 
@@ -89,7 +89,7 @@ export default function Login() {
           <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
 
           <Link href={'https://corvane.com'}>
-            <Image src={CorvaneLogo} width={100} height={100} quality={100} alt='Logo' className='w-[172px]'></Image>
+            <Image src={CorvaneLogo} width={100} height={100} quality={100} alt='Logo' className='w-[160px]'></Image>
           </Link>
         </div>
 
