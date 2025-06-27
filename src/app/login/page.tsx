@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import LoginImg from "../../../public/images/login-img.svg"
+import LoginImg from "../../../public/images/login-img.jpeg"
+import CorvaneLogo from "../../../public/images/icons/corvane-logo.svg"
 import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -78,8 +79,8 @@ export default function Login() {
       <div className='flex flex-wrap md:hidden items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 font-glyphic'>
         <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
         
-        <Link href={'https://www.wisethings.co'}>
-          <Image src={'https://framerusercontent.com/images/ysVyiAjOVpxgT0M5l3eBoqAPz9o.svg?scale-down-to=512'} width={100} height={100} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
+        <Link href={'https://corvane.com'}>
+          <Image src={CorvaneLogo} width={100} height={100} unoptimized={true} quality={100} alt='Logo' className='w-[172px]'></Image>
         </Link>
       </div>
 
@@ -87,8 +88,8 @@ export default function Login() {
         <div className='hidden md:flex items-center font-glyphic gap-2 sm:gap-3 md:gap-4 lg:gap-5'>
           <Link href={'/'} className='text-2xl text-[#1A1A32]'>PEDESTAL</Link>
 
-          <Link href={'https://www.wisethings.co'}>
-            <Image src={'https://framerusercontent.com/images/ysVyiAjOVpxgT0M5l3eBoqAPz9o.svg?scale-down-to=512'} width={100} height={100} quality={100} alt='Logo' className='w-[172px]'></Image>
+          <Link href={'https://corvane.com'}>
+            <Image src={CorvaneLogo} width={100} height={100} quality={100} alt='Logo' className='w-[172px]'></Image>
           </Link>
         </div>
 
@@ -127,7 +128,7 @@ export default function Login() {
                   />
 
                   <div className='flex justify-end'>
-                    <Link href='mailto:forgotpassword@wisethings.co' className='text-[#A594FD] font-semibold text-sm lg:text-base'>Forgot Password?</Link>
+                    <Link href='mailto:forgotpassword@corvane.com' className='text-[#A594FD] font-semibold text-sm lg:text-base'>Forgot Password?</Link>
                   </div>
 
                   <Button className='w-full' type="submit">{isLoading ? 'Loading...' : 'Sign in'}</Button>
@@ -135,7 +136,7 @@ export default function Login() {
               </Form>
             </div>
 
-            <p className='text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 text-[#AEAEB2] text-sm lg:text-base'>© {date.getFullYear()} WISE THINGS ALL RIGHTS RESERVED</p>
+            <p className='text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32 text-[#AEAEB2] text-sm lg:text-base'>© {date.getFullYear()} CORVANE ALL RIGHTS RESERVED</p>
           </div>
         </div>
       </div>

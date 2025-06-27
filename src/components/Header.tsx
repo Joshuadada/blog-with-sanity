@@ -18,7 +18,7 @@ const navLinks: { name: string, href: string }[] = [
   { name: 'All Insights', href: '/all-insights' },
   { name: 'Consumer Insights', href: '/consumer-insights' },
   { name: 'Economic Insights', href: '/economic-insights' },
-  { name: 'About', href: 'https://www.wisethings.co/pedestal' }
+  { name: 'About', href: 'https://corvane.com/company' }
 ]
 
 export const Header = () => {
@@ -79,7 +79,7 @@ export const Header = () => {
             })}
           <li className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'><Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-0.5 sm:gap-1 2xl:gap-1.5'><span>Log In to Plural</span> <Image src={SlantArr} alt='slant arrow' className='w-5'></Image></Link></li>
           <li>
-            <Link href={'https://www.wisethings.co/contact'}><button className='bg-black font-grotesk text-white font-medium px-2 sm:px-3 md:px-3 2xl:px-5 py-0.5 md:py-1 lg:py-1.5 text-[0.6rem] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
+            <Link href={'https://corvane.com/'}><button className='bg-black font-grotesk text-white font-medium px-2 sm:px-3 md:px-3 2xl:px-5 py-0.5 md:py-1 lg:py-1.5 text-[0.6rem] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
           </li>
         </ul>
       </div>
@@ -138,7 +138,7 @@ export const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href={'https://www.wisethings.co/contact'}><button className='bg-black font-grotesk text-white font-medium px-3 2xl:px-5 py-1.5 text-[0.6rem] text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
+            <Link href={'https://corvane.com/'}><button className='bg-black font-grotesk text-white font-medium px-3 2xl:px-5 py-1.5 text-[0.6rem] text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
           </li>
         </ul>
       </div>
