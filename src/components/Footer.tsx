@@ -1,9 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import WiseThingLogo from "../../public/images/wise-thing-logo.svg"
-import FooterImg from "../../public/images/footer-img.svg"
 import Link from 'next/link'
 import { getAllTags } from '@/sanity/sanity-utils'
 import { Tag } from '@/app/types/tag.type'
