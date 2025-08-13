@@ -77,7 +77,7 @@ export const Header = () => {
                 </Link>
               )
             })}
-          <li className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'><Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-0.5 sm:gap-1 2xl:gap-1.5'><span>Log In to Plural</span> <Image src={SlantArr} alt='slant arrow' className='w-5'></Image></Link></li>
+          {/* <li className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'><Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-0.5 sm:gap-1 2xl:gap-1.5'><span>Log In to Plural</span> <Image src={SlantArr} alt='slant arrow' className='w-5'></Image></Link></li> */}
           <li>
             <Link href={'https://corvane.com/'}><button className='bg-black font-grotesk text-white font-medium px-2 sm:px-3 md:px-3 2xl:px-5 py-0.5 md:py-1 lg:py-1.5 text-[0.6rem] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
           </li>
@@ -131,12 +131,12 @@ export const Header = () => {
           {!isLogin && <Link href={'/login'} className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`}>Log In</Link>}
           {isLogin && <p className={`text-base xl:text-lg 2xl:text-xl font-grotesk font-medium ${pathname.includes('login') ? 'underline' : ''}`} onClick={logout}>Log Out</p>}
 
-          <li className='text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'>
+          {/* <li className='text-base xl:text-lg 2xl:text-xl font-grotesk font-medium'>
             <Link href={"https://app.useplural.com/auth/login"} className='flex items-center gap-1 2xl:gap-1.5'>
               <span>Log In to Plural</span>
               <Image src={SlantArr} alt='slant arrow' className='w-5'></Image>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href={'https://corvane.com/'}><button className='bg-black font-grotesk text-white font-medium px-3 2xl:px-5 py-1.5 text-[0.6rem] text-base xl:text-lg 2xl:text-xl rounded-2xl sm:rounded-3xl md:rounded-4xl lg:rounded-[60px] xl:rounded-[80px] 2xl:rounded-[100px] cursor-pointer'>Get Started</button></Link>
           </li>
