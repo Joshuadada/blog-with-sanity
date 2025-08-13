@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import SlantArr from "../../public/images/icons/slant-arr.svg"
+// import SlantArr from "../../public/images/icons/slant-arr.svg"
 import SearchIcon from "../../public/images/icons/search.svg"
 import HambuggerIcon from "../../public/images/icons/hamburger.svg"
 import CloseIcon from "../../public/images/icons/close.svg"
